@@ -1,0 +1,9 @@
+---
+- hosts: junos
+  #serial: 1
+  roles:
+  - get_devices_info
+
+
+
+ 

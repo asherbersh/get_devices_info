@@ -1,0 +1,4 @@
+---
+# defaults file for get_devices_info
+
+dir: roles/get_devices_info/files/

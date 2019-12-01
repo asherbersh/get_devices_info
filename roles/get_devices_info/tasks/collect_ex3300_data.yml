@@ -1,0 +1,53 @@
+---
+
+- name: collect infromation from the switch
+  junos_command: 
+   commands: 
+    - show version
+    - show interfaces terse vlan.106
+    - show virtual-chassis
+    - show ntp associations
+   display: xml
+
+  register: cmd_result
+  
+
+- name: collect device facts
+  junos_facts:
+    config_format: json
+    gather_subset: hardware
+  register: facts_result
+
+- name: save result in file
+  copy: 
+    content: "{{cmd_result}}"  
+    mode: "777" 
+    dest: "{{dir}}cmd_results_{{inventory_hostname}}.json"
+
+- name: save facts in file
+  copy: 
+    content: "{{facts_result}}"  
+    mode: "777" 
+    dest: "{{dir}}Facts_{{inventory_hostname}}.json"
+ 
+
+- name: "set results to facts" 
+  set_fact: 
+    net_cmd_show: "{{cmd_result}}"
+    net_facts: "{{facts_result}}"
+    host_name: "{{facts_result['ansible_facts']['ansible_net_hostname']}}"
+    switch_ver: "{{ cmd_result.output[0]['rpc-reply']['multi-routing-engine-results']['multi-routing-engine-item'][0]['software-information']['package-information'][0].comment | default(cmd_result.output[0]['rpc-reply']['multi-routing-engine-results']['multi-routing-engine-item']['software-information']['package-information'][0].comment) }}"
+    product_model: "{{facts_result['ansible_facts']['ansible_net_model']}}" 
+    ip_address: "{{ cmd_result.output[1]['rpc-reply']['interface-information']['logical-interface']['address-family']['interface-address']['ifa-local']}}"
+
+
+   
+- name: test output using debug
+  debug:
+    msg: "{{switch_ver}} 
+          {{host_name}}
+          {{ip_address}}"
+
+
+
+    

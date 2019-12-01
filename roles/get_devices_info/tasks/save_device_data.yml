@@ -1,0 +1,10 @@
+---
+
+# - name: save data to excel file  
+#   dict_to_excel:
+#       column: 2
+#       data: "asher is best5"
+#       file_to_save: "device_report.xlsx"
+#        #newline: False
+#       run_once: true 
+#       register: cmd

@@ -1,0 +1,6 @@
+---
+- name: cleanup files
+  file:
+   path: "{{dir}}*.*"
+   state: absent
+  run_once: true

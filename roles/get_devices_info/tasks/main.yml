@@ -1,0 +1,10 @@
+---
+
+- name: cleanup old results
+  import_tasks: "cleunup_results.yml"
+
+- name: collect ex3300 information
+  import_tasks: "collect_ex3300_data.yml"
+
+- name: save device information to file
+  import_tasks: "save_device_data.yml"
