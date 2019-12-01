@@ -6,7 +6,6 @@
     - show version
     - show interfaces terse vlan.106
     - show virtual-chassis
-    - show ntp associations
    display: xml
 
   register: cmd_result
@@ -39,14 +38,22 @@
     switch_ver: "{{ cmd_result.output[0]['rpc-reply']['multi-routing-engine-results']['multi-routing-engine-item'][0]['software-information']['package-information'][0].comment | default(cmd_result.output[0]['rpc-reply']['multi-routing-engine-results']['multi-routing-engine-item']['software-information']['package-information'][0].comment) }}"
     product_model: "{{facts_result['ansible_facts']['ansible_net_model']}}" 
     ip_address: "{{ cmd_result.output[1]['rpc-reply']['interface-information']['logical-interface']['address-family']['interface-address']['ifa-local']}}"
+    vc_count: "{{cmd_result.output[2]['rpc-reply']['virtual-chassis-information']['next-member-information']['next-member-id']}}"
+    re_cpu: "{{100-facts_result['ansible_facts']['ansible_net_routing_engines']['0']['cpu_idle'] | int}}"
+    re_memory: "{{facts_result['ansible_facts']['ansible_net_routing_engines']['0']['memory_buffer_utilization']}}"
+
 
 
    
-- name: test output using debug
-  debug:
-    msg: "{{switch_ver}} 
-          {{host_name}}
-          {{ip_address}}"
+# - name: test output using debug
+#   debug:
+#     msg: "{{switch_ver}} 
+#           {{host_name}}
+#           {{ip_address}}
+#           {{vc_count}}
+#           {{re_cpu}}
+#           {{re_memory}}
+#           "
 
 
 
