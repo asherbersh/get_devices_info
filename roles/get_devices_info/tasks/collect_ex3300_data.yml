@@ -42,18 +42,16 @@
     re_cpu: "{{100-facts_result['ansible_facts']['ansible_net_routing_engines']['0']['cpu_idle'] | int}}"
     re_memory: "{{facts_result['ansible_facts']['ansible_net_routing_engines']['0']['memory_buffer_utilization']}}"
 
-
-
+- name: "create a dictinory from all gathered facts"
+  set_fact:
+    list_test: "{{{'1':host_name,'2':switch_ver,'3':product_model,'4':ip_address,'5':vc_count,'7':re_cpu,'8':re_memory}}}"
+               
    
-# - name: test output using debug
-#   debug:
-#     msg: "{{switch_ver}} 
-#           {{host_name}}
-#           {{ip_address}}
-#           {{vc_count}}
-#           {{re_cpu}}
-#           {{re_memory}}
-#           "
+- name: test output using debug
+  debug:
+    msg: "
+          {{list_test}}
+          "
 
 
 

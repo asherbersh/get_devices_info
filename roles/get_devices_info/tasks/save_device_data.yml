@@ -5,6 +5,7 @@
       column: 1
       data: "{{host_name}}"
       file_to_save: "{{excel_save_file}}"
+  #throttle: 1
 
 - name: save data to excel file  
   dict_to_excel:

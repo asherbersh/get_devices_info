@@ -18,4 +18,4 @@
   testing:
     hosts:
       test_switch:
-        ansible_host: 10.9.106.37
+        ansible_host: 10.9.106.30
