@@ -1,50 +1,13 @@
 ---
 
-- name: save data to excel file  
-  dict_to_excel:
-      column: 1
-      data: "{{host_name}}"
-      file_to_save: "{{excel_save_file}}"
-  #throttle: 1
+# - name: save data to excel file  
+#   dict_to_excel:
+#       column: 1
+#       data: "{{host_name}}"
+#       file_to_save: "{{excel_save_file}}"
+#   #throttle: 1
 
-- name: save data to excel file  
+- name: save dict data to excel file from  
   dict_to_excel:
-      column: 2
-      data: "{{switch_ver}}"
+      dict_data: "{{device_facts_list}}"
       file_to_save: "{{excel_save_file}}"
-      newline: False
-
-- name: save data to excel file  
-  dict_to_excel:
-      column: 3
-      data: "{{product_model}}"
-      file_to_save: "{{excel_save_file}}"
-      newline: False
-
-- name: save data to excel file  
-  dict_to_excel:
-      column: 4
-      data: "{{ip_address}}"
-      file_to_save: "{{excel_save_file}}"
-      newline: False
-
-- name: save data to excel file  
-  dict_to_excel:
-      column: 5
-      data: "{{vc_count}}"
-      file_to_save: "{{excel_save_file}}"
-      newline: False
-      
-- name: save data to excel file  
-  dict_to_excel:
-      column: 7
-      data: "{{re_cpu}}"
-      file_to_save: "{{excel_save_file}}"
-      newline: False
-
-- name: save data to excel file  
-  dict_to_excel:
-      column: 8
-      data: "{{re_memory}}"
-      file_to_save: "{{excel_save_file}}"
-      newline: False
