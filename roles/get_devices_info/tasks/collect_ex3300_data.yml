@@ -45,6 +45,15 @@
 - name: "create a dictinory from all gathered facts"
   set_fact:
     device_facts_list: "{{{1:host_name,2:switch_ver,3:product_model,4:ip_address,5:vc_count,6:re_cpu,7:re_memory}}}"
+  
+# - debug:
+#     msg: "{{host_name}}
+#           {{switch_ver}}
+#           {{product_model}}
+#           {{vc_count}}
+#           {{re_cpu}}
+#           {{re_memory}}
+#     "
                
  
 
