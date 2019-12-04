@@ -4,5 +4,7 @@
   vars:
     host_group: "junos"
   roles:
-  - get_devices_info
+  - role: get_devices_info
+
+
  

@@ -4,7 +4,7 @@
   junos_command: 
    commands: 
     - show version
-    - show interfaces terse vlan.106
+    - show interfaces terse irb.106
     - show virtual-chassis
    display: xml
 
