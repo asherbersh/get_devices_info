@@ -3,6 +3,10 @@
 - name: cleanup old results
   import_tasks: "cleunup_results.yml"
 
+- name: collect ex2300 information
+  import_tasks: "collect_ex2300_data.yml"
+  when: hostvars[inventory_hostname].model=="ex2300"
+
 - name: collect ex3300 information
   import_tasks: "collect_ex3300_data.yml"
   when: hostvars[inventory_hostname].model=="ex3300"
