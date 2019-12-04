@@ -1,5 +1,4 @@
 ---
-
 # - name: save data to excel file  
 #   dict_to_excel:
 #       column: 1
@@ -7,8 +6,15 @@
 #       file_to_save: "{{excel_save_file}}"
 #   #throttle: 1
 
-- name: save dict data to excel file from  
-  dict_to_excel:
-      dict_data: "{{device_facts_list}}"
-      file_to_save: "{{excel_save_file}}"
-  #throttle: 1 
+#  - name: save dict data to excel file from  
+#    dict_to_excel:
+#     dict_data: "{{device_facts_list}}"
+#     file_to_save: "{{excel_save_file}}"
+ 
+
+ - name: save dict data to excel file from  
+   dict_to_excel:
+    dict_data: "{{hostvars[item]['device_facts_list']}}"
+    file_to_save: "{{excel_save_file}}"
+   loop: "{{groups[host_group]}}"
+   run_once: True

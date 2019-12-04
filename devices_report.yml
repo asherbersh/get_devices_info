@@ -1,9 +1,8 @@
 ---
 - hosts: junos
-  serial: 1 # run the commands on one device at a time 
+ # serial: 1 # run the commands on one device at a time 
+  vars:
+    host_group: "junos"
   roles:
   - get_devices_info
-
-
-
  

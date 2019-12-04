@@ -8,5 +8,4 @@
 
 - name: save device information to file
   import_tasks: "save_device_data.yml"
-  #throttle: 1
   
