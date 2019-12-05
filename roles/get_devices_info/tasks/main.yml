@@ -15,6 +15,10 @@
   import_tasks: "collect_ex3400_data.yml"
   when: hostvars[inventory_hostname].model=="ex3400"
 
+- name: collect general information
+  import_tasks: "collect_general_data.yml"
+  when: hostvars[inventory_hostname].model=="general"
+
 - name: save device information to file
   import_tasks: "save_device_data.yml"
   

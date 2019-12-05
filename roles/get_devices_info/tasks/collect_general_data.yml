@@ -1,0 +1,53 @@
+---
+
+- name: collect infromation from the general
+  junos_command: 
+   commands: 
+    - show version
+    #- show interfaces terse|match 106
+   display: xml
+
+  register: cmd_result
+  
+
+- name: collect device facts
+  junos_facts:
+    config_format: json
+    gather_subset: hardware
+  register: facts_result
+
+- name: save result in file
+  copy: 
+    content: "{{cmd_result}}"  
+    mode: "777" 
+    dest: "{{dir}}cmd_results_{{inventory_hostname}}.json"
+
+- name: save facts in file
+  copy: 
+    content: "{{facts_result}}"  
+    mode: "777" 
+    dest: "{{dir}}Facts_{{inventory_hostname}}.json"
+ 
+
+- name: "set results to facts" 
+  set_fact: 
+    host_name: "{{facts_result['ansible_facts']['ansible_net_hostname']}}"
+    switch_ver: "{{cmd_result.output[0]['rpc-reply']['software-information']['junos-version']}}"
+    product_model: "{{facts_result['ansible_facts']['ansible_net_model']}}" 
+    re_cpu: "{{100-facts_result['ansible_facts']['ansible_net_routing_engines']['null']['cpu_idle'] | int}}"
+    re_memory: "{{facts_result['ansible_facts']['ansible_net_routing_engines']['null']['memory_system_total_util']|default(facts_result['ansible_facts']['ansible_net_routing_engines']['null']['memory_buffer_utilization'])}}"
+    #ip_address: "{{ cmd_result.output[1]['rpc-reply']['interface-information']['logical-interface']['address-family']['interface-address']['ifa-local']}}"
+
+- name: "create a dictinory from all gathered facts"
+  set_fact:
+    device_facts_list: "{{{1:host_name,2:switch_ver,3:product_model,6:re_cpu,7:re_memory}}}"
+
+
+    
+               
+ 
+
+
+
+
+    
