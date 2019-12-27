@@ -12,5 +12,5 @@ this anisble playbook gets  the following data from the network devices :
 the following data the is being collected is then saved to an excel file 
 
 network_devices.xlsx file contains all devices we would like to take any data from .
-s
+
 devices_report.yml file contains all the information that was collected from the network devices
